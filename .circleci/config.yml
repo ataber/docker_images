@@ -18,16 +18,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/cmake cmake
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/cmake; \
-            else docker tag ataber/cmake ataber/cmake:${CIRCLE_BRANCH} && \
-                 docker push ataber/cmake:${CIRCLE_BRANCH}; fi
+          name: Build + deploy image
+          command: ./build-and-deploy-image cmake ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
+          no_output_timeout: "30m"
 
   intel_mkl:
     executor: compiler
@@ -40,17 +33,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/intel_mkl intel_mkl
+          name: Build + deploy image
+          command: ./build-and-deploy-image intel_mkl ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
           no_output_timeout: "30m"
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/intel_mkl; \
-            else docker tag ataber/intel_mkl ataber/intel_mkl:${CIRCLE_BRANCH} && \
-                 docker push ataber/intel_mkl:${CIRCLE_BRANCH}; fi
 
   vtk:
     executor: compiler
@@ -63,16 +48,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/vtk vtk
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/vtk; \
-            else docker tag ataber/vtk ataber/vtk:${CIRCLE_BRANCH} && \
-                 docker push ataber/vtk:${CIRCLE_BRANCH}; fi
+          name: Build + deploy image
+          command: ./build-and-deploy-image vtk ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
+          no_output_timeout: "30m"
 
   mkl_vtk:
     executor: compiler
@@ -85,17 +63,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/mkl_vtk mkl_vtk
+          name: Build + deploy image
+          command: ./build-and-deploy-image mkl_vtk ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
           no_output_timeout: "30m"
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/mkl_vtk; \
-            else docker tag ataber/mkl_vtk ataber/mkl_vtk:${CIRCLE_BRANCH} && \
-                 docker push ataber/mkl_vtk:${CIRCLE_BRANCH}; fi
 
   petsc:
     executor: compiler
@@ -108,16 +78,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/petsc petsc
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/petsc; \
-            else docker tag ataber/petsc ataber/petsc:${CIRCLE_BRANCH} && \
-                 docker push ataber/petsc:${CIRCLE_BRANCH}; fi
+          name: Build + deploy image
+          command: ./build-and-deploy-image petsc ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
+          no_output_timeout: "30m"
 
   slepc:
     executor: compiler
@@ -130,16 +93,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/slepc slepc
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/slepc; \
-            else docker tag ataber/slepc ataber/slepc:${CIRCLE_BRANCH} && \
-                 docker push ataber/slepc:${CIRCLE_BRANCH}; fi
+          name: Build + deploy image
+          command: ./build-and-deploy-image slepc ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
+          no_output_timeout: "30m"
 
   libmesh:
     executor: compiler
@@ -152,16 +108,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/libmesh libmesh
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/libmesh; \
-            else docker tag ataber/libmesh ataber/libmesh:${CIRCLE_BRANCH} && \
-                 docker push ataber/libmesh:${CIRCLE_BRANCH}; fi
+          name: Build + deploy image
+          command: ./build-and-deploy-image libmesh ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
+          no_output_timeout: "30m"
 
   mfem:
     executor: compiler
@@ -174,16 +123,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/mfem mfem
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/mfem; \
-            else docker tag ataber/mfem ataber/mfem:${CIRCLE_BRANCH} && \
-                 docker push ataber/mfem:${CIRCLE_BRANCH}; fi
+          name: Build + deploy image
+          command: ./build-and-deploy-image mfem ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
+          no_output_timeout: "30m"
 
   trilinos:
     executor: compiler
@@ -196,16 +138,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/trilinos trilinos
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/trilinos; \
-            else docker tag ataber/trilinos ataber/trilinos:${CIRCLE_BRANCH} && \
-                 docker push ataber/trilinos:${CIRCLE_BRANCH}; fi
+          name: Build + deploy image
+          command: ./build-and-deploy-image trilinos ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
+          no_output_timeout: "30m"
 
   dealii:
     executor: compiler
@@ -218,16 +153,9 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - run:
-          name: Build image
-          command: docker build -t ataber/dealii dealii
-      - deploy:
-          name: Deploy image to Docker Hub
-          command: |
-            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
-            if [[ ${CIRCLE_BRANCH} == "master" ]]; \
-            then docker push ataber/dealii; \
-            else docker tag ataber/dealii ataber/dealii:${CIRCLE_BRANCH} && \
-                 docker push ataber/dealii:${CIRCLE_BRANCH}; fi
+          name: Build + deploy image
+          command: ./build-and-deploy-image dealii ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
+          no_output_timeout: "30m"
 
 workflows:
   version: 2

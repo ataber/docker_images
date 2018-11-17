@@ -1,0 +1,15 @@
+#!/bin/bash
+
+image_name=$1
+docker_user=$2
+docker_password=$3
+branch=$4
+revision=$5
+
+docker build -t ataber/${image_name} ${image_name}
+docker login --username ${docker_user} --password ${docker_password}
+
+docker tag ataber/${image_name} ataber/${image_name}:${branch}
+docker tag ataber/${image_name} ataber/${image_name}:${revision}
+
+docker push ataber/${image_name}:${branch}
