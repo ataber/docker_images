@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
@@ -21,7 +21,7 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     rm -rf /var/lib/apt/lists/*
 
 ARG CMAKE_MAJOR_VERSION=3.12
-ARG CMAKE_MINOR_VERSION=3
+ARG CMAKE_MINOR_VERSION=4
 ARG CMAKE_VERSION=$CMAKE_MAJOR_VERSION.$CMAKE_MINOR_VERSION
 RUN cd /tmp \
     && wget https://cmake.org/files/v$CMAKE_MAJOR_VERSION/cmake-$CMAKE_VERSION.tar.gz \
