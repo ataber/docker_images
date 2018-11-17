@@ -1,4 +1,4 @@
-FROM ataber/cmake
+FROM ataber/cmake:xenial
 
 RUN apt-get update --fix-missing && \
     apt-get -y upgrade && \

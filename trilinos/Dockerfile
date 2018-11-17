@@ -1,4 +1,4 @@
-FROM ataber/slepc
+FROM ataber/slepc:xenial
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \

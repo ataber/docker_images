@@ -1,4 +1,4 @@
-FROM ataber/trilinos
+FROM ataber/trilinos:xenial
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \

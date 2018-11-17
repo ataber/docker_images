@@ -1,4 +1,4 @@
-FROM ataber/petsc
+FROM ataber/petsc:xenial
 
 #slepc
 ENV SLEPC_VERSION 3.10.1

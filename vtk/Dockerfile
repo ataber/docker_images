@@ -1,4 +1,4 @@
-FROM ataber/cmake
+FROM ataber/cmake:xenial
 
 RUN cd /tmp && \
     wget -nv -O- http://www.vtk.org/files/release/8.1/VTK-8.1.1.tar.gz | \

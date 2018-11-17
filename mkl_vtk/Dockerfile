@@ -1,4 +1,4 @@
-FROM ataber/vtk
+FROM ataber/vtk:xenial
 
 RUN apt-get update --fix-missing && \
     apt-get -y upgrade && \
