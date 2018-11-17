@@ -173,7 +173,7 @@ jobs:
           command: apk add --no-cache bash
       - run:
           name: Build image
-          command: docker build -t ataber/mfem
+          command: docker build -t ataber/mfem mfem
       - deploy:
           name: Deploy image to Docker Hub
           command: |
@@ -217,7 +217,7 @@ jobs:
           command: apk add --no-cache bash
       - run:
           name: Build image
-          command: docker build -t ataberdealii/
+          command: docker build -t ataber/dealii dealii
       - deploy:
           name: Deploy image to Docker Hub
           command: |
