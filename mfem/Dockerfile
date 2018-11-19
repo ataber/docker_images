@@ -14,7 +14,7 @@ RUN cd /tmp && \
     wget -nv -O- https://computation.llnl.gov/projects/hypre-scalable-linear-solvers-multigrid-methods/download/hypre-2.10.0b.tar.gz | \
     tar xz && \
     cd hypre-2.10.0b/src && \
-    ./configure && \
+    ./configure --disable-fortran && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l)&& \
     make install && \
     make clean
@@ -27,7 +27,6 @@ RUN cd /tmp && \
              -DMFEM_THREAD_SAFE=YES \
              -DMFEM_USE_PETSC=YES \
              -DVERBOSE=YES \
-             -DPETSC_ARCH= \
              -DMFEM_USE_OPENMP=YES \
              -DPETSC_DIR=$PETSC_DIR \
              -DMFEM_USE_MPI=YES && \
