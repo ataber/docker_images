@@ -1,4 +1,5 @@
-FROM ataber/cmake:xenial
+ARG TAG=latest
+FROM ataber/cmake:$TAG
 
 RUN cd /tmp && \
     wget -nv -O- http://www.vtk.org/files/release/8.1/VTK-8.1.1.tar.gz | \

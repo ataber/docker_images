@@ -1,4 +1,5 @@
-FROM ataber/slepc:xenial
+ARG TAG=latest
+FROM ataber/slepc:$TAG
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \

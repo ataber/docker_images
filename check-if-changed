@@ -1,19 +1,23 @@
 #!/bin/bash
 
-touch branch_cache.txt
+mkdir -p branch_cache
 directory_name=$1
 if [[ $(git diff --name-only HEAD..HEAD^ | grep ${directory_name}) ]]; then
-  echo ${directory_name}
-  echo ${directory_name} >> branch_cache.txt
+  touch branch_cache/${directory_name}
   exit 0
 else
-  first_line=$(head -n 1 ${directory_name}/Dockerfile)
-  while read p; do
-    if [[ $first_line == "FROM ataber/$p" ]]; then
-      echo ${directory_name} >> branch_cache.txt
-      exit 0
+  first_line=$(head -n 2 ${directory_name}/Dockerfile)
+  for file in ./branch_cache/* ; do
+    if [[ -f "$file" ]]; then
+      p=${file:15}
+
+      if [[ $first_line == *"$p"* ]]; then
+        echo $first_line
+        touch branch_cache/${directory_name}
+        exit 0
+      fi
     fi
-  done < branch_cache.txt
+  done
 
   exit 1
 fi

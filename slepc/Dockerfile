@@ -1,4 +1,5 @@
-FROM ataber/petsc:xenial
+ARG TAG=latest
+FROM ataber/petsc:$TAG
 
 #slepc
 ENV SLEPC_VERSION 3.10.1

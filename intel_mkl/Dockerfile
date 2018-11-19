@@ -1,4 +1,5 @@
-FROM ataber/cmake:xenial
+ARG TAG=latest
+FROM ataber/cmake:$TAG
 
 RUN apt-get update --fix-missing && \
     apt-get -y upgrade && \

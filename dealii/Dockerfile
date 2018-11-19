@@ -1,4 +1,5 @@
-FROM ataber/trilinos:xenial
+ARG TAG=latest
+FROM ataber/trilinos:$TAG
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \

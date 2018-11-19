@@ -17,182 +17,16 @@ jobs:
       - run:
           name: Install bash
           command: apk add --no-cache bash
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image cmake ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache.txt
-
-  intel_mkl:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo
+          at: /root/repo/branch_cache
       - run:
           name: Build + deploy image
-          command: ./build-and-deploy-image intel_mkl ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
+          command: ./build-and-deploy-image cmake
+          no_output_timeout: 30m
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache.txt
-
-  vtk:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image vtk ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache.txt
-
-  mkl_vtk:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image mkl_vtk ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache.txt
-
-  petsc:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - attach_workspace:
-          at: /root/repo
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image petsc ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache.txt
-
-  slepc:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - attach_workspace:
-          at: /root/repo
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image slepc ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache.txt
-
-  libmesh:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image libmesh ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache.txt
-
-  mfem:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image mfem ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache.txt
-
-  trilinos:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image trilinos ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache.txt
+            - branch_cache/*
 
   dealii:
     executor: compiler
@@ -205,27 +39,201 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo
+          at: /root/repo/branch_cache
       - run:
           name: Build + deploy image
-          command: ./build-and-deploy-image dealii ${DOCKER_USER} ${DOCKER_PASSWORD} ${CIRCLE_BRANCH} ${CIRCLE_SHA1}
-          no_output_timeout: "30m"
+          command: ./build-and-deploy-image dealii
+          no_output_timeout: 30m
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache.txt
+            - branch_cache/*
+
+  intel_mkl:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/branch_cache
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image intel_mkl
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache/*
+
+  libmesh:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/branch_cache
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image libmesh
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache/*
+
+  mfem:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/branch_cache
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image mfem
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache/*
+
+  mkl_vtk:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/branch_cache
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image mkl_vtk
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache/*
+
+  petsc:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/branch_cache
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image petsc
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache/*
+
+  slepc:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/branch_cache
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image slepc
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache/*
+
+  trilinos:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/branch_cache
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image trilinos
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache/*
+
+  vtk:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/branch_cache
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image vtk
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache/*
 
 workflows:
   version: 2
   build-images:
     jobs:
       - cmake
-      - vtk:
+      - dealii:
           requires:
-            - cmake
+            - trilinos
       - intel_mkl:
           requires:
             - cmake
+      - libmesh:
+          requires:
+            - slepc
+      - mfem:
+          requires:
+            - vtk
       - mkl_vtk:
           requires:
             - vtk
@@ -235,15 +243,9 @@ workflows:
       - slepc:
           requires:
             - petsc
-      - libmesh:
-          requires:
-            - slepc
-      - mfem:
-          requires:
-            - slepc
       - trilinos:
           requires:
             - slepc
-      - dealii:
+      - vtk:
           requires:
-            - trilinos
+            - cmake

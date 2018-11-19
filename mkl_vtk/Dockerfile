@@ -1,4 +1,5 @@
-FROM ataber/vtk:xenial
+ARG TAG=latest
+FROM ataber/vtk:$TAG
 
 RUN apt-get update --fix-missing && \
     apt-get -y upgrade && \

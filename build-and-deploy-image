@@ -9,7 +9,7 @@ revision=${CIRCLE_SHA1}
 ./check-if-changed ${image_name}
 retVal=$?
 if [ $retVal == 0 ]; then
-  docker build -t ataber/${image_name} ${image_name}
+  docker build --build-arg TAG=${branch} -t ataber/${image_name} ${image_name}
   docker login --username ${docker_user} --password ${docker_password}
 
   docker tag ataber/${image_name} ataber/${image_name}:${branch}
