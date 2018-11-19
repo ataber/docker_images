@@ -18,7 +18,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image cmake
@@ -26,7 +26,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   dealii:
     executor: compiler
@@ -39,7 +39,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image dealii
@@ -47,7 +47,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   intel_mkl:
     executor: compiler
@@ -60,7 +60,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image intel_mkl
@@ -68,7 +68,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   libmesh:
     executor: compiler
@@ -81,7 +81,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image libmesh
@@ -89,7 +89,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   mfem:
     executor: compiler
@@ -102,7 +102,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image mfem
@@ -110,7 +110,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   mkl_vtk:
     executor: compiler
@@ -123,7 +123,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image mkl_vtk
@@ -131,7 +131,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   petsc:
     executor: compiler
@@ -144,7 +144,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image petsc
@@ -152,7 +152,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   slepc:
     executor: compiler
@@ -165,7 +165,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image slepc
@@ -173,7 +173,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   trilinos:
     executor: compiler
@@ -186,7 +186,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image trilinos
@@ -194,7 +194,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
   vtk:
     executor: compiler
@@ -207,7 +207,7 @@ jobs:
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image vtk
@@ -215,7 +215,7 @@ jobs:
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
+            - branch_cache
 
 workflows:
   version: 2

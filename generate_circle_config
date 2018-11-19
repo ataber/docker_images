@@ -1,7 +1,8 @@
 #!/bin/bash
 
-rm -f config_generated.yml
-touch config_generated.yml
+config_file=.circleci/config.yml
+rm -f ${config_file}
+touch ${config_file}
 echo "version: 2.1
 
 executors:
@@ -10,7 +11,7 @@ executors:
       - image: docker:17.06.0-ce-git
     working_directory: ~/repo
 
-jobs:" >> config_generated.yml
+jobs:" >> ${config_file}
 
 for file in ./* ; do
   if [[ -d "$file" ]]; then
@@ -26,7 +27,7 @@ for file in ./* ; do
           name: Install bash
           command: apk add --no-cache bash
       - attach_workspace:
-          at: /root/repo/branch_cache
+          at: /root/repo/
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image ${directory_name}
@@ -34,28 +35,28 @@ for file in ./* ; do
       - persist_to_workspace:
           root: /root/repo
           paths:
-            - branch_cache/*
-" >> config_generated.yml
+            - branch_cache
+" >> ${config_file}
   fi;
 done
 
 echo "workflows:
   version: 2
   build-images:
-    jobs:" >> config_generated.yml
+    jobs:" >> ${config_file}
 
 for file in ./* ; do
   if [[ -d "$file" ]]; then
     directory_name=${file:2}
     first_line=$(head -n 2 ${directory_name}/Dockerfile)
     if [[ ${first_line:5} == "ubuntu" ]]; then
-      echo "      - ${directory_name}" >> config_generated.yml
+      echo "      - ${directory_name}" >> ${config_file}
     else
       dependent_image=${first_line:27}
 
       echo "      - ${directory_name}:
           requires:
-            - ${dependent_image%?????}" >> config_generated.yml
+            - ${dependent_image%?????}" >> ${config_file}
     fi
   fi;
 done
