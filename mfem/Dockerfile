@@ -1,5 +1,5 @@
 ARG TAG=latest
-FROM ataber/vtk:$TAG
+FROM ataber/slepc:$TAG
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
