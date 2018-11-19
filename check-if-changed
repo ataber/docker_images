@@ -1,0 +1,19 @@
+#!/bin/bash
+
+touch branch_cache.txt
+directory_name=$1
+if [[ $(git diff --name-only HEAD..HEAD^ | grep ${directory_name}) ]]; then
+  echo ${directory_name}
+  echo ${directory_name} >> branch_cache.txt
+  exit 0
+else
+  first_line=$(head -n 1 ${directory_name}/Dockerfile)
+  while read p; do
+    if [[ $first_line == "FROM ataber/$p" ]]; then
+      echo ${directory_name} >> branch_cache.txt
+      exit 0
+    fi
+  done < branch_cache.txt
+
+  exit 1
+fi

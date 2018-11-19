@@ -1,0 +1,61 @@
+#!/bin/bash
+
+rm config_generated.yml
+touch config_generated.yml
+echo "version: 2.1
+
+executors:
+  compiler:
+    docker:
+      - image: docker:17.06.0-ce-git
+    working_directory: ~/repo
+
+jobs:" >> config_generated.yml
+
+for file in ./* ; do
+  if [[ -d "$file" ]]; then
+    directory_name=${file:2}
+    echo "  ${directory_name}:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image ${directory_name}
+          no_output_timeout: "30m"
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache.txt
+    " >> config_generated.yml
+  fi;
+done
+
+echo "workflows:
+  version: 2
+  build-images:
+    jobs:" >> config_generated.yml
+
+for file in ./* ; do
+  if [[ -d "$file" ]]; then
+    directory_name=${file:2}
+    first_line=$(head -n 1 ${directory_name}/Dockerfile)
+    if [[ ${first_line:5} == "ubuntu" ]]; then
+      echo "      - ${directory_name}" >> config_generated.yml
+    else
+      dependent_image=${first_line:12}
+
+      echo "      - ${directory_name}:
+          requires:
+            - ${dependent_image}" >> config_generated.yml
+    fi
+  fi;
+done
