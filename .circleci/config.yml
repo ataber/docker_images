@@ -7,6 +7,27 @@ executors:
     working_directory: ~/repo
 
 jobs:
+  circleci:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image circleci
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache
+
   cmake:
     executor: compiler
     steps:
@@ -284,6 +305,9 @@ workflows:
   version: 2
   build-images:
     jobs:
+      - circleci:
+          requires:
+            - mkl_vtk
       - cmake
       - dealii:
           requires:
