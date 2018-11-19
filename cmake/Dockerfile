@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
