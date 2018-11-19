@@ -12,7 +12,6 @@ else
       p=${file:15}
 
       if [[ $first_line == *"$p"* ]]; then
-        echo $first_line
         touch branch_cache/${directory_name}
         exit 0
       fi

@@ -49,14 +49,14 @@ for file in ./* ; do
   if [[ -d "$file" ]]; then
     directory_name=${file:2}
     first_line=$(head -n 2 ${directory_name}/Dockerfile)
-    if [[ ${first_line:5} == "ubuntu" ]]; then
-      echo "      - ${directory_name}" >> ${config_file}
-    else
+    if [[ ${first_line} == *"ataber"* ]]; then
       dependent_image=${first_line:27}
 
       echo "      - ${directory_name}:
           requires:
             - ${dependent_image%?????}" >> ${config_file}
+    else
+      echo "      - ${directory_name}" >> ${config_file}
     fi
   fi;
 done
