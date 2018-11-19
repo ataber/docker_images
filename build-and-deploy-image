@@ -16,7 +16,7 @@ if [ $retVal == 0 ]; then
   for tag in "$branch" "$revision"; do
     echo "Deploying image with tag: ${tag}"
     docker tag ${image_name} ataber/${image_name}:${tag}
-    docker push ataber/${image_name}:$tag}
+    docker push ataber/${image_name}:${tag}
   done
 else
   echo "No changes for image ${image_name}"
