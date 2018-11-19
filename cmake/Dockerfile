@@ -28,7 +28,7 @@ RUN cd /tmp \
     && tar xf cmake-$CMAKE_VERSION.tar.gz \
     && cd cmake-$CMAKE_VERSION \
     && ./bootstrap \
-    && make \
+    && make -j $(cat /proc/cpuinfo | grep processor | wc -l) \
     && make install \
     && cd .. \
     && rm -rf cmake*
