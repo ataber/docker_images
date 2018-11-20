@@ -11,6 +11,7 @@ RUN apt-get update \
         libpq-dev \
         libgdbm-dev \
         redis-tools \
+        tzdata \
         nodejs \
         libcurl4-gnutls-dev \
         procps \
