@@ -2,7 +2,7 @@ ARG TAG=latest
 FROM ataber/mkl_vtk:$TAG
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         bzip2 \
         ca-certificates \
         libffi-dev \
