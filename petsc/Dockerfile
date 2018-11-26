@@ -15,7 +15,6 @@ RUN apt-get update --fix-missing \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-#petsc
 ENV PETSC_VERSION 3.10.2
 RUN cd /tmp && \
     wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-$PETSC_VERSION.tar.gz && \
