@@ -22,24 +22,24 @@ RUN cd /tmp && \
     tar xf petsc-lite-$PETSC_VERSION.tar.gz && rm -f petsc-lite-$PETSC_VERSION.tar.gz && \
     cd petsc-$PETSC_VERSION && \
     ./configure \
-	--download-fblaslapack \
-	--download-hypre=1  \
-	--download-scalapack \
-	--download-mumps \
-	--download-metis \
-	--download-parmetis \
-	--download-superlu \
-	--download-superlu_dist \
-	--prefix=/usr/lib/petsc-$PETSC_VERSION \
-	--with-cc=mpicc \
-	--with-cxx=mpicxx \
-	--with-fc=mpif90 \
-	--with-ff=mpif77 \
-	--with-clanguage=C++ \
-	--with-debugging=1 \
-    	--with-shared-libraries=1 \
-	--with-x=0 \
-    	COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
+    --download-fblaslapack \
+    --download-hypre=1  \
+    --download-scalapack \
+    --download-mumps \
+    --download-metis \
+    --download-parmetis \
+    --download-superlu \
+    --download-superlu_dist \
+    --prefix=/usr/lib/petsc-$PETSC_VERSION \
+    --with-cc=mpicc \
+    --with-cxx=mpicxx \
+    --with-fc=mpif90 \
+    --with-ff=mpif77 \
+    --with-clanguage=C++ \
+    --with-debugging=1 \
+    --with-shared-libraries=1 \
+    --with-x=0 \
+    COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
     make PETSC_DIR=`pwd` -j $(cat /proc/cpuinfo | grep processor | wc -l) all && \
     make PETSC_DIR=`pwd` install && \
     cd /tmp && rm -rf petsc-$PETSC_VERSION
