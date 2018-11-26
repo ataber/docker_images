@@ -4,7 +4,7 @@ FROM ataber/cmake:$TAG
 RUN cd /tmp && \
     wget -nv -O- http://www.vtk.org/files/release/8.1/VTK-8.1.1.tar.gz | \
     tar xz && \
-    cd VTK-8.1.1 && \
+    cd VTK-8.1.2 && \
     CXX=mpicxx cmake \
     -D CMAKE_BUILD_TYPE:STRING=Release \
     -D CMAKE_INSTALL_PREFIX:STRING=/usr/lib/vtk \
@@ -28,5 +28,5 @@ RUN cd /tmp && \
     . && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) VERBOSE=1 && \
     make install && \
-    cd .. && rm -rf VTK-8.1.1
+    cd .. && rm -rf VTK-8.1.2
 ENV VTK_DIR /usr/lib/vtk
