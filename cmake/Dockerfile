@@ -20,8 +20,8 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ARG CMAKE_MAJOR_VERSION=3.12
-ARG CMAKE_MINOR_VERSION=4
+ARG CMAKE_MAJOR_VERSION=3.13
+ARG CMAKE_MINOR_VERSION=0
 ARG CMAKE_VERSION=$CMAKE_MAJOR_VERSION.$CMAKE_MINOR_VERSION
 
 RUN cd /tmp \
