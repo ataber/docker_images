@@ -1,10 +1,15 @@
 ARG TAG=latest
 FROM ataber/cmake:$TAG
 
+ARG VTK_MAJOR_VERSION=8
+ARG VTK_MINOR_VERSION=1
+ARG VTK_PATCH_VERSION=2
+ARG VTK_VERSION=$VTK_MAJOR_VERSION.$VTK_MINOR_VERSION.$VTK_PATCH_VERSION
+
 RUN cd /tmp && \
-    wget -nv -O- http://www.vtk.org/files/release/8.1/VTK-8.1.1.tar.gz | \
+    wget -nv -O- http://www.vtk.org/files/release/$VTK_MAJOR_VERSION.$VTK_MINOR_VERSION/VTK-$VTK_VERSION.tar.gz | \
     tar xz && \
-    cd VTK-8.1.2 && \
+    cd VTK-$VTK_VERSION && \
     CXX=mpicxx cmake \
     -D CMAKE_BUILD_TYPE:STRING=Release \
     -D CMAKE_INSTALL_PREFIX:STRING=/usr/lib/vtk \
@@ -28,5 +33,5 @@ RUN cd /tmp && \
     . && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) VERBOSE=1 && \
     make install && \
-    cd .. && rm -rf VTK-8.1.2
+    cd .. && rm -rf VTK-$VTK_VERSION
 ENV VTK_DIR /usr/lib/vtk
