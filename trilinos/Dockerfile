@@ -80,4 +80,3 @@ RUN cd /tmp && \
    rm -rf Trilinos-trilinos-release-* &&\
    rm -rf trilinos-release-*
 ENV TRILINOS_DIR /usr/lib/trilinos-$TRILINOS_VERSION
-
