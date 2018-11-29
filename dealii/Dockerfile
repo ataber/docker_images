@@ -20,10 +20,14 @@ RUN cd /tmp && \
     cd dealii-$VER-src && \
     git checkout $VER && \
     mkdir build && cd build && \
-    CXX=mpicxx cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
-          -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-          -GNinja \
-          ../ && \
+    CXX=mpicxx cmake \
+        -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
+        -DDEAL_II_WITH_MPI=ON \
+        -DDEAL_II_WITH_PETSC=ON \
+        -DDEAL_II_WITH_SLEPC=ON \
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+        -GNinja \
+        ../ && \
     ninja library && \
     ninja install && \
     cd /tmp && \
