@@ -5,7 +5,6 @@ RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  apt-get install -y --force-yes \
     git \
-    ninja-build \
     numdiff \
     pkg-config \
 &&  apt-get clean \
@@ -20,16 +19,15 @@ RUN cd /tmp && \
     cd dealii-$VER-src && \
     git checkout $VER && \
     mkdir build && cd build && \
-    cmake \
+    CXX=mpicxx cmake \
         -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
-        -DDEAL_II_WITH_MPI=OFF \
+        -DDEAL_II_WITH_MPI=ON \
         -DDEAL_II_WITH_PETSC=ON \
         -DDEAL_II_WITH_SLEPC=ON \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-        -GNinja \
         ../ && \
-    ninja library && \
-    ninja install && \
+    make -j $(cat /proc/cpuinfo | grep processor | wc -l) library && \
+    make install && \
     cd /tmp && \
     rm -rf dealii-$VER-src
 
