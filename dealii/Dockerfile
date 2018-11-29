@@ -20,9 +20,9 @@ RUN cd /tmp && \
     cd dealii-$VER-src && \
     git checkout $VER && \
     mkdir build && cd build && \
-    CXX=mpicxx cmake \
+    cmake \
         -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
-        -DDEAL_II_WITH_MPI=ON \
+        -DDEAL_II_WITH_MPI=OFF \
         -DDEAL_II_WITH_PETSC=ON \
         -DDEAL_II_WITH_SLEPC=ON \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
@@ -33,5 +33,4 @@ RUN cd /tmp && \
     cd /tmp && \
     rm -rf dealii-$VER-src
 
-ENV DEAL_II_DIR $INSTALL_DIR
-
+ENV DEAL_II_DIR $INSTALL_DIR/dealii
