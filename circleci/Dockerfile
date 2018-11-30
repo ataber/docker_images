@@ -13,6 +13,7 @@ RUN apt-get update \
         redis-tools \
         tzdata \
         nodejs \
+        curl \
         libcurl4-gnutls-dev \
         procps \
         zlib1g-dev \
