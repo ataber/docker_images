@@ -25,6 +25,7 @@ RUN cd /tmp && \
                  --with-vtk-include=$VTK_DIR/include/vtk-8.1 \
                  --with-vtk-lib=$VTK_DIR/lib \
                  --disable-shared \
+                 --enable-all-static \
                  --disable-eigen \
                  --with-cxx=mpicxx \
                  --with-metis=PETSc && \
