@@ -19,9 +19,8 @@ RUN cd /tmp && \
     cd dealii-$VER-src && \
     git checkout $VER && \
     mkdir build && cd build && \
-    CXX=mpicxx cmake \
+    cmake \
         -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
-        -DDEAL_II_WITH_MPI=ON \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
         ../ && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) library && \
