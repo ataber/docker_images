@@ -18,10 +18,8 @@ RUN cd /tmp && \
     cd build && \
     CXX=mpicxx cmake .. \
         -DCMAKE_INSTALL_PREFIX=$MFEM_DIR \
-        -DMFEM_USE_PETSC=YES \
         -DMFEM_USE_MPI=YES \
-        -DVERBOSE=YES \
-        -DPETSC_DIR=$PETSC_DIR && \
+        -DVERBOSE=YES && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
     cd /tmp && rm -rf mfem
