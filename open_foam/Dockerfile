@@ -5,6 +5,7 @@ RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  apt-get install -y --force-yes \
     flex \
+    git-core \
     bison \
     zlib1g-dev \
     libboost-system-dev \
