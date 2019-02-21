@@ -18,7 +18,7 @@ RUN apt-get update --fix-missing \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-RUN cd /tmp && \
+RUN mkdir -p /tmp && cd /tmp && \
     git clone https://github.com/OpenFOAM/OpenFOAM-dev.git && \
     git clone https://github.com/OpenFOAM/ThirdParty-dev.git && \
     echo "source /tmp/OpenFOAM-dev/etc/bashrc" >> ~/.bashrc && \
