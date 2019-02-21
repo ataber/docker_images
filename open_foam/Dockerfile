@@ -23,7 +23,6 @@ RUN mkdir -p /tmp && cd /tmp && \
     git clone https://github.com/OpenFOAM/OpenFOAM-dev.git && \
     git clone https://github.com/OpenFOAM/ThirdParty-dev.git && \
     echo "source /tmp/OpenFOAM-dev/etc/bashrc" >> ~/.bashrc && \
-    source ~/.bashrc && \
     (cd ThirdParty-dev && ./Allwmake -j $(cat /proc/cpuinfo | grep processor | wc -l)) && \
     (cd OpenFOAM-dev && ./Allwmake -j $(cat /proc/cpuinfo | grep processor | wc -l)) && \
     cd /tmp && rm -rf OpenFOAM-dev && rm -rf ThirdParty-dev
