@@ -16,8 +16,7 @@ RUN apt-get update --fix-missing \
     libreadline-dev \
     libncurses-dev \
     libxt-dev \
-    libopenmpi-dev \
-    openmpi-bin \
+    mpich \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
