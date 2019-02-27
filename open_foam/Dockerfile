@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/OpenFOAM && cd /tmp/OpenFOAM && \
     git clone https://github.com/OpenFOAM/ThirdParty-dev.git && \
     echo "source /tmp/OpenFOAM-dev/etc/bashrc" >> ~/.bashrc && \
     # https://bugs.openfoam.org/view.php?id=2588
-    source /etc/profile.d/mpi-selector.sh && \
+    /bin/sh /etc/profile.d/mpi-selector.sh && \
     /bin/sh /tmp/OpenFOAM/OpenFOAM-dev/etc/bashrc && \
     (cd ThirdParty-dev && ./Allwmake -j $(cat /proc/cpuinfo | grep processor | wc -l)) && \
     (cd OpenFOAM-dev && ./Allwmake -j $(cat /proc/cpuinfo | grep processor | wc -l)) && \
