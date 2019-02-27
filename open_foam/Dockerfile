@@ -16,7 +16,6 @@ RUN apt-get update --fix-missing \
     libreadline-dev \
     libncurses-dev \
     libxt-dev \
-    mpich2 \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
