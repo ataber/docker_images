@@ -8,3 +8,5 @@ RUN apt-get update --fix-missing \
 &&  apt-get install -y --force-yes openfoam6 \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+RUN echo "source /opt/openfoam6/etc/bashrc" > $HOME/bashrc
+
