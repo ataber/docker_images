@@ -10,6 +10,7 @@ RUN apt-get update \
         libyaml-dev \
         libpq-dev \
         libgdbm-dev \
+        autotools \
         redis-tools \
         tzdata \
         nodejs \
