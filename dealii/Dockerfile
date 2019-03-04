@@ -19,7 +19,7 @@ RUN cd /tmp && \
     cd dealii-$VER-src && \
     git checkout $VER && \
     mkdir build && cd build && \
-    CXX=mpicxx cmake \
+    cmake \
         -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
         -DBUILD_SHARED_LIBS=OFF \
         -DDEAL_II_WITH_MPI=ON \
