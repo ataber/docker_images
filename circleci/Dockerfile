@@ -13,6 +13,7 @@ RUN apt-get update \
         autoconf \
         autotools-dev \
         redis-tools \
+        libxml2 \
         tzdata \
         nodejs \
         libcurl4-gnutls-dev \
