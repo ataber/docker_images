@@ -9,6 +9,7 @@ RUN apt-get update --fix-missing \
     clang-tidy \
     iwyu \
     cppcheck \
+    doxygen \
     libopenmpi-dev \
     openmpi-bin \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
