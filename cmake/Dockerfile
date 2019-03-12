@@ -2,7 +2,8 @@ FROM ubuntu
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
-&&  apt-get install -y wget \
+&&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    wget \
     software-properties-common \
     make \
     build-essential \
@@ -10,6 +11,7 @@ RUN apt-get update --fix-missing \
     iwyu \
     cppcheck \
     doxygen \
+    graphviz \
     libopenmpi-dev \
     openmpi-bin \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
