@@ -2,7 +2,8 @@ FROM ubuntu
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
-&&  apt-get install -y wget \
+&&  apt-get install -y \
+    wget \
     software-properties-common \
     make \
     build-essential \
