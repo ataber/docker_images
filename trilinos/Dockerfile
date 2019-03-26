@@ -21,8 +21,8 @@ RUN apt-get update --fix-missing \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 # Make open mpi use clang
-ENV OMPI_CC clang-5.0
-ENV OMPI_CXX clang++-5.0
+ENV OMPI_CC $CC
+ENV OMPI_CXX $CXX
 
 #Build Trilinos
 ENV TRILINOS_VERSION 12-12-1
