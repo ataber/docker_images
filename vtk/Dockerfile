@@ -10,6 +10,8 @@ RUN cd /tmp && \
     wget -nv -O- http://www.vtk.org/files/release/$VTK_MAJOR_VERSION.$VTK_MINOR_VERSION/VTK-$VTK_VERSION.tar.gz | \
     tar xz && \
     cd VTK-$VTK_VERSION && \
+    mkdir build && \
+    cd build && \
     cmake \
     -D CMAKE_BUILD_TYPE:STRING=Release \
     -D CMAKE_INSTALL_PREFIX:STRING=/usr/lib/vtk \
@@ -30,8 +32,8 @@ RUN cd /tmp && \
     -D VTK_Group_Web:BOOL=OFF \
     -D VTK_Group_Views:BOOL=OFF \
     -D VTK_WRAP_PYTHON=OFF \
-    . && \
+    .. && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) VERBOSE=1 && \
     make install && \
-    cd .. && rm -rf VTK-$VTK_VERSION
+    cd ../.. && rm -rf VTK-$VTK_VERSION
 ENV VTK_DIR /usr/lib/vtk
