@@ -14,6 +14,8 @@ RUN apt-get update --fix-missing \
     graphviz \
     libopenmpi-dev \
     openmpi-bin \
+    google-perftools \
+    libgoogle-perftools-dev \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
