@@ -2,26 +2,31 @@ FROM ubuntu
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
-&&  apt-get install -y wget \
+&&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    wget \
     software-properties-common \
     make \
     build-essential \
     clang-tidy \
     iwyu \
     cppcheck \
+    doxygen \
+    graphviz \
     libopenmpi-dev \
     openmpi-bin \
+    google-perftools \
+    libgoogle-perftools-dev \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-5.0 main" && \
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" && \
     apt-get update --fix-missing && \
-    apt-get install -y clang-5.0 && \
+    apt-get install -y clang-8 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ARG CMAKE_MAJOR_VERSION=3.13
-ARG CMAKE_MINOR_VERSION=0
+ARG CMAKE_MAJOR_VERSION=3.14
+ARG CMAKE_MINOR_VERSION=1
 ARG CMAKE_VERSION=$CMAKE_MAJOR_VERSION.$CMAKE_MINOR_VERSION
 RUN cd /tmp \
     && wget https://cmake.org/files/v$CMAKE_MAJOR_VERSION/cmake-$CMAKE_VERSION.tar.gz \
@@ -33,8 +38,8 @@ RUN cd /tmp \
     && cd .. \
     && rm -rf cmake*
 
-ENV CC clang-5.0
-ENV CXX clang++-5.0
+ENV CC clang-8
+ENV CXX clang++-8
 ENV MPI_C mpicc
 ENV MPI_CXX mpicxx
 

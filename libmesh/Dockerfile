@@ -22,7 +22,7 @@ RUN cd /tmp && \
                  --enable-petsc \
                  --enable-slepc \
                  --enable-vtk \
-                 --with-vtk-include=$VTK_DIR/include/vtk-8.1 \
+                 --with-vtk-include=$VTK_DIR/include/vtk-$VTK_MAJOR_VERSION.$VTK_MINOR_VERSION \
                  --with-vtk-lib=$VTK_DIR/lib \
                  --disable-eigen \
                  --with-cxx=mpicxx \
