@@ -175,6 +175,27 @@ jobs:
           paths:
             - branch_cache
 
+  open_foam:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image open_foam
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache
+
   petsc:
     executor: compiler
     steps:
@@ -196,7 +217,7 @@ jobs:
           paths:
             - branch_cache
 
-  python_bionic:
+  python:
     executor: compiler
     steps:
       - checkout
@@ -210,14 +231,14 @@ jobs:
           at: /root/repo/
       - run:
           name: Build + deploy image
-          command: ./build-and-deploy-image python_bionic
+          command: ./build-and-deploy-image python
           no_output_timeout: 30m
       - persist_to_workspace:
           root: /root/repo
           paths:
             - branch_cache
 
-  ruby_bionic:
+  ruby:
     executor: compiler
     steps:
       - checkout
@@ -231,7 +252,7 @@ jobs:
           at: /root/repo/
       - run:
           name: Build + deploy image
-          command: ./build-and-deploy-image ruby_bionic
+          command: ./build-and-deploy-image ruby
           no_output_timeout: 30m
       - persist_to_workspace:
           root: /root/repo
@@ -327,11 +348,14 @@ workflows:
       - mkl_vtk:
           requires:
             - vtk
+      - open_foam:
+          requires:
+            - vtk
       - petsc:
           requires:
             - vtk
-      - python_bionic
-      - ruby_bionic
+      - python
+      - ruby
       - slepc:
           requires:
             - petsc

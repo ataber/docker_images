@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:disco
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \

@@ -1,4 +1,4 @@
-FROM buildpack-deps:bionic
+FROM buildpack-deps:disco
 
 # Copy-pasted from https://github.com/docker-library/python/blob/88812635c8ad7ff06a8a3755616a1040df222f3c/3.7/stretch/Dockerfile
 
