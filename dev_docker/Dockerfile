@@ -1,5 +1,5 @@
 ARG TAG=latest
-FROM ataber/ruby_bionic:$TAG
+FROM ataber/ruby:$TAG
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \

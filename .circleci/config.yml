@@ -335,7 +335,7 @@ workflows:
             - trilinos
       - dev_docker:
           requires:
-            - ruby_bionic
+            - ruby
       - intel_mkl:
           requires:
             - cmake
