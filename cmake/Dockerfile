@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:wily
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
