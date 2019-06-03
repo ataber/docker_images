@@ -19,6 +19,7 @@ RUN apt-get update \
         libcurl4-gnutls-dev \
         procps \
         zlib1g-dev \
+        libxslt-dev \
     && rm -rf /var/lib/apt/lists/*
 
 ## Copy-pasted from https://github.com/docker-library/ruby/blob/ccacdf5eb9e69b6f249a890c87621679410e7d74/2.5/stretch/Dockerfile
