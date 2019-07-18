@@ -154,6 +154,27 @@ jobs:
           paths:
             - branch_cache
 
+  mfem_mkl:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image mfem_mkl
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache
+
   mkl_vtk:
     executor: compiler
     steps:
@@ -169,6 +190,27 @@ jobs:
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image mkl_vtk
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache
+
+  open_foam:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image open_foam
           no_output_timeout: 30m
       - persist_to_workspace:
           root: /root/repo
@@ -324,7 +366,13 @@ workflows:
       - mfem:
           requires:
             - petsc
+      - mfem_mkl:
+          requires:
+            - mfem
       - mkl_vtk:
+          requires:
+            - vtk
+      - open_foam:
           requires:
             - vtk
       - petsc:
