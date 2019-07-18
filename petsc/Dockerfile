@@ -23,8 +23,6 @@ RUN cd /tmp && \
     --download-scalapack \
     --download-mumps \
     --download-metis \
-    --download-superlu \
-    --download-superlu_dist \
     --prefix=/usr/lib/petsc-$PETSC_VERSION \
     --with-clanguage=C++ \
     --with-debugging=1 \
@@ -39,6 +37,4 @@ RUN cd /tmp && \
 ENV PETSC_DIR /usr/lib/petsc-$PETSC_VERSION
 ENV METIS_DIR $PETSC_DIR
 ENV SCALAPACK_DIR $PETSC_DIR
-ENV SUPERLU_DIR $PETSC_DIR
-ENV SUPERLU_DIST_DIR $PETSC_DIR
 ENV MUMPS_DIR $PETSC_DIR
