@@ -30,6 +30,7 @@ RUN cd /tmp && \
     --prefix=/usr/lib/petsc-$PETSC_VERSION \
     --with-clanguage=C++ \
     --with-debugging=1 \
+    --with-mpi=0 \
     --with-shared-libraries=0 \
     --with-x=0 \
     COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
