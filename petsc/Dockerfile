@@ -10,8 +10,6 @@ RUN apt-get update --fix-missing \
     liblapack-dev \
     unzip \
     wget \
-    libopenmpi-dev \
-    openmpi-bin \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
@@ -30,10 +28,6 @@ RUN cd /tmp && \
     --download-superlu \
     --download-superlu_dist \
     --prefix=/usr/lib/petsc-$PETSC_VERSION \
-    --with-cc=mpicc \
-    --with-cxx=mpicxx \
-    --with-fc=mpif90 \
-    --with-ff=mpif77 \
     --with-clanguage=C++ \
     --with-debugging=1 \
     --with-shared-libraries=0 \

@@ -16,9 +16,9 @@ RUN cd /tmp && \
     cd mfem && \
     mkdir build && \
     cd build && \
-    CXX=mpicxx cmake .. \
+    cmake .. \
         -DCMAKE_INSTALL_PREFIX=$MFEM_DIR \
-        -DMFEM_USE_MPI=YES \
+        -DMFEM_USE_MPI=OFF \
         -DBUILD_SHARED_LIBS=OFF \
         -DVERBOSE=YES && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \

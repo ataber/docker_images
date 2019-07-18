@@ -27,7 +27,7 @@ RUN cd /tmp && \
                  --disable-shared \
                  --enable-all-static \
                  --disable-eigen \
-                 --with-cxx=mpicxx \
+                 --with-cxx=$CXX \
                  --with-metis=PETSc && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \

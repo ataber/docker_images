@@ -12,8 +12,6 @@ RUN apt-get update --fix-missing \
     cppcheck \
     doxygen \
     graphviz \
-    libopenmpi-dev \
-    openmpi-bin \
     google-perftools \
     libgoogle-perftools-dev \
     lldb \
@@ -43,8 +41,6 @@ RUN cd /tmp \
 
 ENV CC clang-8
 ENV CXX clang++-8
-ENV MPI_C mpicc
-ENV MPI_CXX mpicxx
 
 RUN mkdir /app
 WORKDIR /app
