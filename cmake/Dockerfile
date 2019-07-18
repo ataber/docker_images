@@ -16,6 +16,8 @@ RUN apt-get update --fix-missing \
     openmpi-bin \
     google-perftools \
     libgoogle-perftools-dev \
+    lldb \
+    valgrind \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
