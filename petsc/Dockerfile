@@ -20,7 +20,6 @@ RUN cd /tmp && \
     cd petsc-$PETSC_VERSION && \
     ./configure \
     --download-fblaslapack \
-    --download-hypre=1  \
     --download-scalapack \
     --download-mumps \
     --download-metis \
@@ -43,4 +42,3 @@ ENV SCALAPACK_DIR $PETSC_DIR
 ENV SUPERLU_DIR $PETSC_DIR
 ENV SUPERLU_DIST_DIR $PETSC_DIR
 ENV MUMPS_DIR $PETSC_DIR
-ENV HYPRE_DIR $PETSC_DIR
