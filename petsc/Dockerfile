@@ -36,7 +36,7 @@ RUN cd /tmp && \
     --with-cxx=mpicxx \
     --with-fc=mpif90 \
     --with-ff=mpif77 \
-    --with-mpi=0 \
+    --with-mpi \
     --with-shared-libraries=0 \
     --with-x=0 \
     COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
