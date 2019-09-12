@@ -17,7 +17,7 @@ RUN apt-get update --fix-missing \
     google-perftools \
     python3.5 \
     python3.5-dev \
-    python3-distutils \
+    python3-distutils-extra \
     libgoogle-perftools-dev \
     lldb \
     valgrind \
