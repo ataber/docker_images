@@ -15,6 +15,9 @@ RUN apt-get update --fix-missing \
     libopenmpi-dev \
     openmpi-bin \
     google-perftools \
+    python3.6 \
+    python3.6-dev \
+    python3-distutils \
     libgoogle-perftools-dev \
     lldb \
     valgrind \
