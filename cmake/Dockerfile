@@ -13,6 +13,9 @@ RUN apt-get update --fix-missing \
     doxygen \
     graphviz \
     google-perftools \
+    python3.6 \
+    python3.6-dev \
+    python3-distutils \
     libgoogle-perftools-dev \
     lldb \
     valgrind \

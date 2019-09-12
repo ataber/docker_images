@@ -20,6 +20,7 @@ RUN cd /tmp && \
         -DCMAKE_INSTALL_PREFIX=$MFEM_DIR \
         -DMFEM_USE_MPI=OFF \
         -DBUILD_SHARED_LIBS=OFF \
+        -DMFEM_USE_OPENMP=YES \
         -DVERBOSE=YES && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
