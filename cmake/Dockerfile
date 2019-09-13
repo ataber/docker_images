@@ -18,6 +18,7 @@ RUN apt-get update --fix-missing \
     python3.6 \
     python3.6-dev \
     python3-distutils \
+    python3-pip \
     libgoogle-perftools-dev \
     lldb \
     valgrind \
