@@ -21,6 +21,7 @@ RUN cd /tmp && \
         -DMFEM_USE_MPI=YES \
         -DMFEM_USE_OPENMP=YES \
         -DMFEM_USE_LEGACY_OPENMP=YES \
+        -DMFEM_THREAD_SAFE=YES \
         -DBUILD_SHARED_LIBS=1 \
         -DVERBOSE=YES && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
