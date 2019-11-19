@@ -7,6 +7,8 @@ RUN apt-get update --fix-missing \
     m4 \
     pkg-config \
     libproj-dev \
+    libopenmpi-dev \
+    openmpi-bin \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
@@ -24,8 +26,10 @@ RUN cd /tmp && \
                  --enable-vtk \
                  --with-vtk-include=$VTK_DIR/include/vtk-$VTK_MAJOR_VERSION.$VTK_MINOR_VERSION \
                  --with-vtk-lib=$VTK_DIR/lib \
+                 --disable-shared \
+                 --enable-all-static \
                  --disable-eigen \
-                 --with-cxx=mpicxx \
+                 --with-cxx=$CXX \
                  --with-metis=PETSc && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \

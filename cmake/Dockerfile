@@ -12,8 +12,6 @@ RUN apt-get update --fix-missing \
     cppcheck \
     doxygen \
     graphviz \
-    libopenmpi-dev \
-    openmpi-bin \
     google-perftools \
     python3.6 \
     python3.6-dev \
@@ -45,10 +43,8 @@ RUN cd /tmp \
     && cd .. \
     && rm -rf cmake*
 
-ENV CC clang-9
-ENV CXX clang++-9
-ENV MPI_C mpicc
-ENV MPI_CXX mpicxx
+ENV CC clang-8
+ENV CXX clang++-8
 
 RUN mkdir /app
 WORKDIR /app
