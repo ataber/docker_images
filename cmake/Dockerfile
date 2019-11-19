@@ -23,7 +23,7 @@ RUN apt-get update --fix-missing \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" && \
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main" && \
     apt-get update --fix-missing && \
     apt-get install -y clang-9 && \
     apt-get clean && \
@@ -43,8 +43,8 @@ RUN cd /tmp \
     && cd .. \
     && rm -rf cmake*
 
-ENV CC clang-8
-ENV CXX clang++-8
+ENV CC clang-9
+ENV CXX clang++-9
 
 RUN mkdir /app
 WORKDIR /app
