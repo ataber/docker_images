@@ -21,10 +21,6 @@ RUN cd /tmp && \
     mkdir build && cd build && \
     cmake \
         -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
-        -DBUILD_SHARED_LIBS=OFF \
-        -DDEAL_II_WITH_MPI=OFF \
-        -DDEAL_II_WITH_PETSC=ON \
-        -DDEAL_II_WITH_SLEPC=ON \
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
         ../ && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) library && \
