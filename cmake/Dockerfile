@@ -25,12 +25,12 @@ RUN apt-get update --fix-missing \
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" && \
     apt-get update --fix-missing && \
-    apt-get install -y clang-8 && \
+    apt-get install -y clang-9 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 ARG CMAKE_MAJOR_VERSION=3.15
-ARG CMAKE_MINOR_VERSION=0
+ARG CMAKE_MINOR_VERSION=4
 ARG CMAKE_VERSION=$CMAKE_MAJOR_VERSION.$CMAKE_MINOR_VERSION
 
 RUN cd /tmp \

@@ -21,6 +21,8 @@ RUN cd /tmp && \
         -DMFEM_USE_MPI=OFF \
         -DBUILD_SHARED_LIBS=OFF \
         -DMFEM_USE_OPENMP=YES \
+        -DMFEM_USE_LEGACY_OPENMP=YES \
+        -DMFEM_THREAD_SAFE=YES \
         -DVERBOSE=YES && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
