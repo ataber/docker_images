@@ -7,6 +7,7 @@ RUN apt-get update --fix-missing \
     software-properties-common \
     make \
     build-essential \
+    openssl \
     clang-tidy \
     iwyu \
     cppcheck \
