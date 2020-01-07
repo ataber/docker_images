@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM quay.io/pypa/manylinux1_x86_64
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
