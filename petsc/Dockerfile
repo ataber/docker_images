@@ -22,7 +22,7 @@ RUN cd /tmp && \
     cd petsc-$PETSC_VERSION && \
     ./configure \
     --download-fblaslapack \
-    --download-hypre=1  \
+    --download-hypre  \
     --download-scalapack \
     --download-mumps \
     --download-metis \
