@@ -21,7 +21,7 @@ RUN cd /tmp && \
         -DMFEM_USE_MPI=ON \
         -DMFEM_USE_PETSC=ON \
         -DBUILD_SHARED_LIBS=OFF \
-        -DVERBOSE=YES && \
+        -DMFEM_USE_METIS=1 && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
     cd /tmp && rm -rf mfem
