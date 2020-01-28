@@ -2,7 +2,7 @@ ARG TAG=latest
 FROM ataber/petsc:$TAG
 
 #slepc
-ENV SLEPC_VERSION 3.10.1
+ENV SLEPC_VERSION 3.12.2
 RUN cd /tmp && \
     wget http://slepc.upv.es/download/distrib/slepc-$SLEPC_VERSION.tar.gz \
     -O slepc-$SLEPC_VERSION.tar.gz && \

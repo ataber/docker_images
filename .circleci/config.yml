@@ -369,6 +369,7 @@ workflows:
       - mfem_mkl:
           requires:
             - mfem
+            - intel_mkl
       - mkl_vtk:
           requires:
             - vtk
