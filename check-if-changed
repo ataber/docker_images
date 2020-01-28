@@ -35,9 +35,7 @@ while true; do
 done
 
 if [[ " ${changed_images[@]} " =~ " ${directory_name} " ]]; then
-  echo "CHANGEd"
   exit 0
 else
-  echo "NOT CHANGEd"
   exit 1
 fi
