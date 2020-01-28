@@ -5,10 +5,12 @@ directory_name=$1
 change_dirs=$(git diff --name-only HEAD..HEAD^)
 
 changed_images=()
-for i in "${change_dirs[@]}"
+for file in $change_dirs
 do
-  changed_image=${i%/*}
-  changed_images+=(${changed_image})
+  if [[ $file == *"/Dockerfile"* ]]; then
+    changed_image=${file%/*}
+    changed_images+=(${changed_image})
+  fi
 done
 
 files=($(ls -d */Dockerfile))
