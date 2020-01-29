@@ -5,4 +5,4 @@ FROM ataber/intel_mkl:${TAG} as intel
 FROM ataber/vtk:${TAG}
 COPY --from=intel /opt/intel /opt/intel
 COPY --from=intel /etc/bashrc /etc/bashrc
-RUN cat /etc/bashrc >> ~/.bash_profile
+RUN cat /etc/bashrc >> ~/.bashrc
