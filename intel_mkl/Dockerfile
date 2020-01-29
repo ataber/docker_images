@@ -20,4 +20,6 @@ RUN cd /tmp && \
   rm -rf /opt/intel/.*.log /opt/intel/compilers_and_libraries_${MKL_VER}/licensing && \
   echo "/opt/intel/mkl/lib/intel64" >> /etc/ld.so.conf.d/intel.conf && \
   ldconfig && \
-  echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bash_profile
+  touch /etc/bashrc && \
+  echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> /etc/bashrc && \
+  cat /etc/bashrc >> ~/.bash_profile
