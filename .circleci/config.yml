@@ -373,6 +373,7 @@ workflows:
       - mkl_vtk:
           requires:
             - vtk
+            - intel_mkl
       - open_foam:
           requires:
             - vtk
