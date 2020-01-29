@@ -4,3 +4,4 @@ FROM ataber/intel_mkl:${TAG} as intel
 
 FROM ataber/mfem:$TAG
 COPY --from=intel /opt/intel /opt/intel
+COPY --from=intel ~/.bash_profile ~/.bash_profile
