@@ -369,9 +369,11 @@ workflows:
       - mfem_mkl:
           requires:
             - mfem
+            - intel_mkl
       - mkl_vtk:
           requires:
             - vtk
+            - intel_mkl
       - open_foam:
           requires:
             - vtk
