@@ -22,4 +22,4 @@ RUN cd /tmp && \
   ldconfig && \
   touch /etc/bashrc && \
   echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> /etc/bashrc && \
-  cat /etc/bashrc >> ~/.bash_profile
+  cat /etc/bashrc >> /etc/profile
