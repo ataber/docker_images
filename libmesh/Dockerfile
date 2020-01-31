@@ -16,7 +16,7 @@ ENV LIBMESH_DIR /opt/libmesh
 RUN cd /tmp && \
     git clone https://github.com/libMesh/libmesh.git && \
     cd libmesh && \
-    git submodule update --init &&
+    git submodule update --init && \
     mkdir build && \
     cd build && \
     ../configure --with-methods="opt" \
