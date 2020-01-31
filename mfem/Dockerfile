@@ -16,9 +16,9 @@ RUN cd /tmp && \
     cd mfem && \
     mkdir build && \
     cd build && \
-    CXX=mpicxx cmake .. \
+    cmake .. \
         -DCMAKE_INSTALL_PREFIX=$MFEM_DIR \
-        -DMFEM_USE_MPI=ON \
+        -DMFEM_USE_MPI=OFF \
         -DMFEM_USE_PETSC=OFF \
         -DBUILD_SHARED_LIBS=ON \
         -DMFEM_USE_METIS=1 && \
