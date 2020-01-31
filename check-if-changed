@@ -2,21 +2,42 @@
 
 mkdir -p branch_cache
 directory_name=$1
-if [[ $(git diff --name-only HEAD..HEAD^ | grep ${directory_name}) ]]; then
-  touch branch_cache/${directory_name}
-  exit 0
-else
-  first_line=$(head -n 2 ${directory_name}/Dockerfile)
-  for file in ./branch_cache/* ; do
-    if [[ -f "$file" ]]; then
-      p=${file:15}
+change_dirs=$(git diff --name-only HEAD..HEAD^)
 
-      if [[ $first_line == *"$p"* ]]; then
-        touch branch_cache/${directory_name}
-        exit 0
-      fi
+changed_images=()
+for file in $change_dirs
+do
+  if [[ $file == *"/Dockerfile"* ]]; then
+    changed_image=${file%/*}
+    changed_images+=(${changed_image})
+  fi
+done
+
+files=($(ls -d */Dockerfile))
+while true; do
+  still_propagating=false
+  for f in "${files[@]}"
+  do
+    downstream_image=${f%/*}
+    if [[ ! " ${changed_images[@]} " =~ " ${downstream_image} " ]]; then
+      for i in "${changed_images[@]}"
+      do
+        if $(grep -q ${i} "$f")
+        then
+          changed_images+=($downstream_image)
+          still_propagating=true
+        fi
+      done
     fi
   done
 
+  if [ "$still_propagating" = false ] ; then
+    break
+  fi
+done
+
+if [[ " ${changed_images[@]} " =~ " ${directory_name} " ]]; then
+  exit 0
+else
   exit 1
 fi

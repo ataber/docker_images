@@ -15,14 +15,14 @@ RUN apt-get update --fix-missing \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-ENV PETSC_VERSION 3.10.2
+ENV PETSC_VERSION 3.12.3
 RUN cd /tmp && \
     wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-$PETSC_VERSION.tar.gz && \
     tar xf petsc-lite-$PETSC_VERSION.tar.gz && rm -f petsc-lite-$PETSC_VERSION.tar.gz && \
     cd petsc-$PETSC_VERSION && \
     ./configure \
     --download-fblaslapack \
-    --download-hypre=1  \
+    --download-hypre  \
     --download-scalapack \
     --download-mumps \
     --download-metis \
@@ -36,7 +36,7 @@ RUN cd /tmp && \
     --with-ff=mpif77 \
     --with-clanguage=C++ \
     --with-debugging=1 \
-    --with-shared-libraries=0 \
+    --with-shared-libraries=1 \
     --with-x=0 \
     COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
     make PETSC_DIR=`pwd` -j $(cat /proc/cpuinfo | grep processor | wc -l) all && \
