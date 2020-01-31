@@ -301,6 +301,27 @@ jobs:
           paths:
             - branch_cache
 
+  taichi:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image taichi
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache
+
   trilinos:
     executor: compiler
     steps:
@@ -385,6 +406,9 @@ workflows:
       - slepc:
           requires:
             - petsc
+      - taichi:
+          requires:
+            - cmake
       - trilinos:
           requires:
             - slepc
