@@ -13,6 +13,7 @@ RUN apt-get update --fix-missing \
 RUN cd /tmp && \
     git clone https://github.com/libMesh/libmesh.git && \
     cd libmesh && \
+    git submodule update --init &&
     mkdir build && \
     cd build && \
     ../configure --with-methods="opt" \
