@@ -1,9 +1,9 @@
 ARG TAG=latest
 FROM ataber/vtk:$TAG
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update --fix-missing \
+RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
-&&  apt-get install -y \
+&&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
     make \
     git-all \
     build-essential \
