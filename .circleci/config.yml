@@ -217,6 +217,27 @@ jobs:
           paths:
             - branch_cache
 
+  openvdb:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image openvdb
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache
+
   petsc:
     executor: compiler
     steps:
@@ -396,6 +417,9 @@ workflows:
             - vtk
             - intel_mkl
       - open_foam:
+          requires:
+            - vtk
+      - openvdb:
           requires:
             - vtk
       - petsc:
