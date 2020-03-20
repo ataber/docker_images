@@ -5,6 +5,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  apt-get install -y \
     make \
+    git-all \
     build-essential \
     libboost-iostreams-dev \
     libboost-system-dev \
