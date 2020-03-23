@@ -32,7 +32,7 @@ RUN cd /tmp && \
     mkdir Trilinos-trilinos-release-$TRILINOS_VERSION/build && \
     cd Trilinos-trilinos-release-$TRILINOS_VERSION/build && \
     cmake \
-     -D BUILD_SHARED_LIBS=ON \
+     -D BUILD_SHARED_LIBS=OFF \
      -D CMAKE_BUILD_TYPE=RELEASE \
      -D CMAKE_CXX_FLAGS="-O3" \
      -D CMAKE_C_FLAGS="-O3" \
