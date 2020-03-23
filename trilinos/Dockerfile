@@ -15,8 +15,14 @@ RUN apt-get update --fix-missing \
     numdiff \
     python \
     wget \
+    libopenmpi-dev \
+    openmpi-bin \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
+# Make open mpi use clang
+ENV OMPI_CC $CC
+ENV OMPI_CXX $CXX
 
 #Build Trilinos
 ENV TRILINOS_VERSION 12-12-1
@@ -34,9 +40,9 @@ RUN cd /tmp && \
      -D CMAKE_INSTALL_PREFIX:PATH=/usr/lib/trilinos-$TRILINOS_VERSION \
      -D CMAKE_VERBOSE_MAKEFILE=FALSE \
      -D TPL_ENABLE_Boost=OFF \
-     -D TPL_ENABLE_MPI=OFF \
+     -D TPL_ENABLE_MPI=ON \
      -D TPL_ENABLE_Netcdf:BOOL=OFF \
-     -D TrilinosFramework_ENABLE_MPI:BOOL=OFF \
+     -D TrilinosFramework_ENABLE_MPI:BOOL=ON \
      -D Trilinos_ASSERT_MISSING_PACKAGES:BOOL=OFF \
      -D Trilinos_ENABLE_ALL_OPTIONAL_PACKAGES:BOOL=OFF \
      -D Trilinos_ENABLE_ALL_PACKAGES:BOOL=OFF \
