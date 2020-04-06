@@ -4,6 +4,7 @@ FROM ataber/vtk:$TAG
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  apt-get install -y --force-yes \
+    git \
     libopenmpi-dev \
     openmpi-bin \
 &&  apt-get clean \
