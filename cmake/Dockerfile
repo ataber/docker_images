@@ -16,8 +16,8 @@ RUN apt-get update --fix-missing \
     libopenmpi-dev \
     openmpi-bin \
     google-perftools \
-    python3.6 \
-    python3.6-dev \
+    python3.7 \
+    python3-dev \
     python3-distutils \
     python3-pip \
     python3-sphinx \
