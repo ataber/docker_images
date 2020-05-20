@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:19.10
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
