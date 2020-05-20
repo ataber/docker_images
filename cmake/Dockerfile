@@ -27,7 +27,7 @@ RUN apt-get update --fix-missing \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main" && \
+    apt-add-repository "deb http://apt.llvm.org/eoan/ llvm-toolchain-eoan-9 main" && \
     apt-get update --fix-missing && \
     apt-get install -y clang-9 && \
     apt-get clean && \
