@@ -15,8 +15,10 @@ RUN apt-get update --fix-missing \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-ENV PETSC_VERSION 3.12.3
-RUN cd /tmp && \
+ENV PETSC_VERSION 3.13.1
+# https://askubuntu.com/questions/817255/default-to-python3-for-usr-bin-env-python
+RUN ln -s /usr/bin/python3 /usr/bin/python && \
+    cd /tmp && \
     wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-$PETSC_VERSION.tar.gz && \
     tar xf petsc-lite-$PETSC_VERSION.tar.gz && rm -f petsc-lite-$PETSC_VERSION.tar.gz && \
     cd petsc-$PETSC_VERSION && \

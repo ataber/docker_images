@@ -10,6 +10,7 @@ RUN apt-get update --fix-missing \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
+ENV LIBMESH_DIR /opt/libmesh
 RUN cd /tmp && \
     git clone https://github.com/libMesh/libmesh.git && \
     cd libmesh && \
@@ -17,7 +18,7 @@ RUN cd /tmp && \
     mkdir build && \
     cd build && \
     ../configure --with-methods="opt" \
-                 --prefix=/opt/libmesh \
+                 --prefix=$LIBMESH_DIR \
                  --disable-boost \
                  --disable-metaphysicl \
                  --enable-petsc \
@@ -31,4 +32,3 @@ RUN cd /tmp && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
     cd /tmp && rm -rf libmesh
-ENV LIBMESH_DIR /opt/libmesh
