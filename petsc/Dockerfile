@@ -38,7 +38,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python && \
     --with-ff=mpif77 \
     --with-clanguage=C++ \
     --with-debugging=1 \
-    --with-shared-libraries=1 \
+    --with-shared-libraries=0 \
     --with-x=0 \
     COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
     make PETSC_DIR=`pwd` -j $(cat /proc/cpuinfo | grep processor | wc -l) all && \
