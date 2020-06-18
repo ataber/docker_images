@@ -12,6 +12,7 @@ RUN apt-get update --fix-missing \
     iwyu \
     cppcheck \
     doxygen \
+    default-jre \
     graphviz \
     libopenmpi-dev \
     openmpi-bin \
