@@ -13,6 +13,7 @@ RUN apt-get update --fix-missing \
     cppcheck \
     doxygen \
     graphviz \
+    default-jre \
     libopenmpi-dev \
     openmpi-bin \
     google-perftools \
