@@ -1,4 +1,4 @@
-FROM ubuntu:eoan
+FROM buildpack-deps:buster
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
