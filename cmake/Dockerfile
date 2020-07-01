@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu:eoan
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
@@ -13,6 +13,7 @@ RUN apt-get update --fix-missing \
     cppcheck \
     doxygen \
     graphviz \
+    default-jre \
     libopenmpi-dev \
     openmpi-bin \
     google-perftools \
