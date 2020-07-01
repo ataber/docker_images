@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu:eoan
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
@@ -12,6 +12,7 @@ RUN apt-get update --fix-missing \
     iwyu \
     cppcheck \
     doxygen \
+    default-jre \
     graphviz \
     libopenmpi-dev \
     openmpi-bin \
@@ -21,6 +22,7 @@ RUN apt-get update --fix-missing \
     python3-distutils \
     python3-pip \
     python3-sphinx \
+    python3-venv \
     libgoogle-perftools-dev \
     lldb \
     valgrind \
