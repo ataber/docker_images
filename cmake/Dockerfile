@@ -8,7 +8,7 @@ RUN apt-get update --fix-missing \
     make \
     build-essential \
     libssl-dev \
-    clang-format \
+    clang-format-10 \
     clang-tidy \
     iwyu \
     cppcheck \
