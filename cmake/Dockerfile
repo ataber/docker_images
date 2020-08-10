@@ -8,13 +8,14 @@ RUN apt-get update --fix-missing \
     make \
     build-essential \
     libssl-dev \
-    clang-format \
+    clang-format-10 \
     clang-tidy \
     iwyu \
     cppcheck \
     doxygen \
     default-jre \
     graphviz \
+    default-jre \
     libopenmpi-dev \
     openmpi-bin \
     google-perftools \
@@ -30,14 +31,14 @@ RUN apt-get update --fix-missing \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main" && \
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main" && \
     apt-get update --fix-missing && \
-    apt-get install -y clang-9 && \
+    apt-get install -y clang-10 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ARG CMAKE_MAJOR_VERSION=3.16
-ARG CMAKE_MINOR_VERSION=2
+ARG CMAKE_MAJOR_VERSION=3.18
+ARG CMAKE_MINOR_VERSION=1
 ARG CMAKE_VERSION=$CMAKE_MAJOR_VERSION.$CMAKE_MINOR_VERSION
 
 RUN cd /tmp \
@@ -50,8 +51,8 @@ RUN cd /tmp \
     && cd .. \
     && rm -rf cmake*
 
-ENV CC clang-9
-ENV CXX clang++-9
+ENV CC clang-10
+ENV CXX clang++-10
 ENV MPI_C mpicc
 ENV MPI_CXX mpicxx
 
