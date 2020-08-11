@@ -30,10 +30,11 @@ RUN apt-get update --fix-missing \
     valgrind \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
+ARG CLANG_VERSION=9
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main" && \
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-$CLANG_VERSION main" && \
     apt-get update --fix-missing && \
-    apt-get install -y clang-10 && \
+    apt-get install -y clang-$CLANG_VERSION && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -51,8 +52,8 @@ RUN cd /tmp \
     && cd .. \
     && rm -rf cmake*
 
-ENV CC clang-10
-ENV CXX clang++-10
+ENV CC clang-$CLANG_VERSION
+ENV CXX clang++-$CLANG_VERSION
 ENV MPI_C mpicc
 ENV MPI_CXX mpicxx
 
