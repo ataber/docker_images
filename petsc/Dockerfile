@@ -39,8 +39,8 @@ RUN cd /tmp && \
     --with-debugging=1 \
     --with-shared-libraries=0 \
     --with-x=0 \
-    CFLAGS='-fPIC' CXXXFLAGS='-fPIC' FCFLAGS='-fPIC' COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
-    make PETSC_DIR=`pwd` -j $(cat /proc/cpuinfo | grep processor | wc -l) all && \
+    CFLAGS='-fPIC' CXXFLAGS='-fPIC' FCFLAGS='-fPIC' COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
+    make VERBOSE=1 PETSC_DIR=`pwd` -j $(cat /proc/cpuinfo | grep processor | wc -l) all && \
     make PETSC_DIR=`pwd` install && \
     cd /tmp && rm -rf petsc-$PETSC_VERSION
 
