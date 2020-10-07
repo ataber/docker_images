@@ -37,6 +37,7 @@ RUN cd /tmp && \
     --with-ff=mpif77 \
     --with-clanguage=C++ \
     --with-debugging=1 \
+    --with-pic=1 \
     --with-shared-libraries=0 \
     --with-x=0 \
     COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
