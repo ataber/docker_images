@@ -15,8 +15,6 @@ RUN apt-get update --fix-missing \
     numdiff \
     python \
     wget \
-    libopenmpi-dev \
-    openmpi-bin \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 

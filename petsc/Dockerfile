@@ -10,8 +10,6 @@ RUN apt-get update --fix-missing \
     liblapack-dev \
     unzip \
     wget \
-    libopenmpi-dev \
-    openmpi-bin \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 

@@ -1,4 +1,4 @@
-FROM tacc/tacc-ubuntu18
+FROM tacc/tacc-ubuntu18-impi19.0.7-common:latest
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
@@ -15,8 +15,6 @@ RUN apt-get update --fix-missing \
     doxygen \
     graphviz \
     default-jre \
-    libopenmpi-dev \
-    openmpi-bin \
     google-perftools \
     python3.7 \
     python3-dev \
