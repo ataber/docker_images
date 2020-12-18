@@ -364,6 +364,7 @@ workflows:
       - mfem_vdb:
           requires:
             - mfem_mkl
+            - openvdb
       - mkl_vtk
       - open_foam:
           requires:

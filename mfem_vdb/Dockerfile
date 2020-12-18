@@ -1,39 +1,11 @@
 ARG TAG=latest
-FROM ataber/mfem_mkl:${TAG}
+FROM ataber/mfem_mkl:${TAG} as intel
+FROM ataber/openvdb:${TAG}
 
-RUN apt-get update --fix-missing \
-&&  apt-get upgrade -y --force-yes \
-&&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    make \
-    git-all \
-    build-essential \
-    libboost-iostreams-dev \
-    libboost-system-dev \
-    libtbb-dev \
-    libilmbase-dev \
-    libopenexr-dev \
-&&  apt-get clean \
-&&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
-
-RUN cd /tmp && \
-    git clone https://github.com/Blosc/c-blosc.git && \
-    cd c-blosc && \
-    git checkout tags/v1.5.0 -b v1.5.0 && \
-    mkdir build && \
-    cd build && \
-    cmake .. && \
-    make -j4 && \
-    make install && \
-    cd ../.. && \
-    rm -rf c-blosc
-
-RUN cd /tmp && \
-    git clone https://github.com/AcademySoftwareFoundation/openvdb.git && \
-    cd openvdb && \
-    mkdir build && \
-    cd build && \
-    cmake .. && \
-    make -j4 && \
-    make install && \
-    cd ../.. && \
-    rm -rf openvdb
+# Note we need both bashrc and profile. CircleCI runs non-login shell.
+# https://unix.stackexchange.com/questions/29791/bash-profile-not-sourced-when-running-su
+COPY --from=intel /opt/intel /opt/intel
+COPY --from=intel /etc/bashrc /etc/bashrc
+COPY --from=intel /etc/profile /etc/profile
+RUN cat /etc/bashrc >> ~/.bashrc
+RUN cat /etc/profile >> ~/.bash_profile
