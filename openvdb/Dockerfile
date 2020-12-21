@@ -30,6 +30,7 @@ RUN cd /tmp && \
 RUN cd /tmp && \
     git clone https://github.com/AcademySoftwareFoundation/openvdb.git && \
     cd openvdb && \
+    git checkout tags/v7.2.0 -b v7.2.0 && \
     mkdir build && \
     cd build && \
     cmake .. && \
