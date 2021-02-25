@@ -1,5 +1,5 @@
 ARG TAG=latest
-FROM ataber/vtk:$TAG
+FROM ataber/mkl_vtk:$TAG
 
 # Update apt and install apt dependencies
 RUN apt-get update --fix-missing \
@@ -16,8 +16,19 @@ RUN apt-get update --fix-missing \
     git \
     m4 \
     pkg-config \
+    libgmp3-dev \
+    libmpfr-dev \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
+# Build and install SuiteSparse solvers needed for mfem
+ENV SUITESPARSE_DIR /opt/suitesparse
+RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
+    export CFLAGS="$CFLAGS -fPIC" && \
+    cd /tmp && \
+    git clone https://github.com/DrTimothyAldenDavis/SuiteSparse && \
+    make INSTALL=$SUITESPARSE_DIR library install -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
+    rm -rf /tmp/SuiteSparse
 
 # Build and install METIS
 ENV METIS_DIR /opt/metis
@@ -61,6 +72,7 @@ RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
     cmake .. \
         -DCMAKE_INSTALL_PREFIX=$MFEM_DIR \
         -DMFEM_USE_MPI=ON \
+        -DMFEM_USE_SUITESPARSE=ON \
         -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
         -DMFEM_USE_PETSC=OFF \
         -DBUILD_SHARED_LIBS=OFF \

@@ -1,11 +1,9 @@
 ARG TAG=latest
-FROM ataber/mfem_mkl:${TAG}
+FROM ataber/mfem:${TAG}
 
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    make \
-    git-all \
     build-essential \
     libboost-iostreams-dev \
     libboost-system-dev \
