@@ -81,3 +81,4 @@ RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
     rm -rf /tmp/mfem
+
