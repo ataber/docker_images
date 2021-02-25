@@ -29,7 +29,7 @@ RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
     git clone https://github.com/DrTimothyAldenDavis/SuiteSparse && \
     cd SuiteSparse && \
     make  library -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
-    make INSTALL=$SUITESPARSE_DIR && \
+    make INSTALL=$SUITESPARSE_DIR install && \
     rm -rf /tmp/SuiteSparse
 
 # Build and install METIS
