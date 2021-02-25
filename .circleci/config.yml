@@ -359,12 +359,18 @@ workflows:
             - slepc
       - mfem:
           requires:
-            - petsc
-      - mfem_mkl
+            - vtk
+      - mfem_mkl:
+          requires:
+            - intel_mkl
+            - mfem
       - mfem_vdb:
           requires:
             - mfem_mkl
-      - mkl_vtk
+      - mkl_vtk:
+          requires:
+            - intel_mkl
+            - vtk
       - open_foam:
           requires:
             - vtk
