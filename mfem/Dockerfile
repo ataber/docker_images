@@ -1,22 +1,64 @@
 ARG TAG=latest
-FROM ataber/petsc:$TAG
+FROM ataber/vtk:$TAG
 
+# Update apt and install apt dependencies
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  apt-get install -y --force-yes \
+    bzip2 \
+    gfortran \
+    libblas-dev \
+    liblapack-dev \
+    unzip \
+    wget \
+    libopenmpi-dev \
+    openmpi-bin \
     git \
     m4 \
     pkg-config \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
+# Build and install METIS
+ENV METIS_DIR /opt/metis
+RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
+    export CFLAGS="$CFLAGS -fPIC" && \
+    cd /tmp && \
+    git clone https://github.com/scivision/METIS.git && \
+    cd METIS && \
+    mkdir build && \
+    cd build && \
+    cmake .. \
+    -DCMAKE_INSTALL_PREFIX=$METIS_DIR &&\
+    make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
+    make install && \
+    rm -rf /tmp/METIS
+
+# Build and install HYPRE
+ENV HYPRE_DIR /opt/hypre
+run export CXXFLAGS="$CXXFLAGS -fPIC" && \
+    export CFLAGS="$CFLAGS -fPIC" && \
+    cd /tmp && \
+    git clone https://github.com/hypre-space/hypre.git && \
+    cd /tmp/hypre/src/cmbuild && \
+    CXX=mpicxx \
+    cmake .. && \
+    make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
+    make install && \
+    cp -r /tmp/hypre/src/hypre /opt && \
+    rm -rf /tmp/hypre
+
+# Build and install MFEM
 ENV MFEM_DIR /opt/mfem
-RUN cd /tmp && \
+RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
+    export CFLAGS="$CFLAGS -fPIC" && \
+    cd /tmp && \
     git clone https://github.com/mfem/mfem.git && \
     cd mfem && \
     mkdir build && \
     cd build && \
-    CXX=mpicxx cmake .. \
+    CXX=mpicxx \
+    cmake .. \
         -DCMAKE_INSTALL_PREFIX=$MFEM_DIR \
         -DMFEM_USE_MPI=ON \
         -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
@@ -26,4 +68,4 @@ RUN cd /tmp && \
         -DMFEM_USE_METIS=1 && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
-    cd /tmp && rm -rf mfem
+    rm -rf /tmp/mfem
