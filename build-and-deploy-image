@@ -7,7 +7,7 @@ branch=${CIRCLE_BRANCH}
 revision=${CIRCLE_SHA1}
 
 ./check-if-changed ${image_name}
-retVal=0
+retVal=$?
 if [ $retVal == 0 ]; then
   echo "Building ${image_name}"
   docker build --build-arg TAG=${branch} -t ${image_name} ${image_name}
