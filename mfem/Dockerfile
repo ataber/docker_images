@@ -22,14 +22,14 @@ RUN apt-get update --fix-missing \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 # Build and install SuiteSparse solvers needed for mfem
-ENV SUITESPARSE_DIR /opt/suitesparse
+ENV SuiteSparse_DIR /opt/suitesparse
 RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
     export CFLAGS="$CFLAGS -fPIC" && \
     cd /tmp && \
     git clone https://github.com/DrTimothyAldenDavis/SuiteSparse && \
     cd SuiteSparse && \
     make  library -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
-    make INSTALL=$SUITESPARSE_DIR install && \
+    make INSTALL=$SuiteSparse_DIR install && \
     rm -rf /tmp/SuiteSparse
 
 # Build and install METIS
