@@ -1,7 +1,7 @@
 ARG TAG=latest
 FROM ataber/cmake:$TAG
 
-# Source Apt package from intel
+# Source apt package from intel
 # https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html
 RUN cd /tmp && \
     wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB && \
