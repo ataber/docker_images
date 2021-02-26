@@ -1,5 +1,5 @@
 ARG TAG=latest
-FROM ataber/mkl_vtk:$TAG
+FROM ataber/vtk:$TAG
 
 # Update apt and install apt dependencies
 RUN apt-get update --fix-missing \
@@ -7,8 +7,6 @@ RUN apt-get update --fix-missing \
 &&  apt-get install -y --force-yes \
     bzip2 \
     gfortran \
-    libblas-dev \
-    liblapack-dev \
     unzip \
     wget \
     libopenmpi-dev \
