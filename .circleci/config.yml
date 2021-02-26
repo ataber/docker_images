@@ -338,7 +338,7 @@ workflows:
             - slepc
       - mfem:
           requires:
-            - mkl_vtk
+            - vtk
       - mfem_vdb:
           requires:
             - mfem
