@@ -1,5 +1,5 @@
 ARG TAG=latest
-FROM ataber/vtk:$TAG
+FROM ataber/mkl_vtk:$TAG
 
 # Update apt and install apt dependencies
 RUN apt-get update --fix-missing \
