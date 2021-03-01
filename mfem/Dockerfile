@@ -1,14 +1,15 @@
 ARG TAG=latest
 FROM ataber/mkl_vtk:$TAG
 
+# Use bash as shell so that the intel mkl var script works
+SHELL ["/bin/bash", "-c"]
+
 # Update apt and install apt dependencies
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  apt-get install -y --force-yes \
     bzip2 \
     gfortran \
-    libblas-dev \
-    liblapack-dev \
     unzip \
     wget \
     libopenmpi-dev \
@@ -23,7 +24,8 @@ RUN apt-get update --fix-missing \
 
 # Build and install SuiteSparse solvers needed for mfem
 ENV SuiteSparse_DIR /opt/suitesparse
-RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
+RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
+    export CXXFLAGS="$CXXFLAGS -fPIC" && \
     export CFLAGS="$CFLAGS -fPIC" && \
     cd /tmp && \
     git clone https://github.com/DrTimothyAldenDavis/SuiteSparse && \
@@ -34,7 +36,8 @@ RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
 
 # Build and install METIS
 ENV METIS_DIR /opt/metis
-RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
+RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
+    export CXXFLAGS="$CXXFLAGS -fPIC" && \
     export CFLAGS="$CFLAGS -fPIC" && \
     cd /tmp && \
     git clone https://github.com/scivision/METIS.git && \
@@ -49,7 +52,8 @@ RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
 
 # Build and install HYPRE
 ENV HYPRE_DIR /opt/hypre
-run export CXXFLAGS="$CXXFLAGS -fPIC" && \
+RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
+    export CXXFLAGS="$CXXFLAGS -fPIC" && \
     export CFLAGS="$CFLAGS -fPIC" && \
     cd /tmp && \
     git clone https://github.com/hypre-space/hypre.git && \
@@ -63,7 +67,8 @@ run export CXXFLAGS="$CXXFLAGS -fPIC" && \
 
 # Build and install MFEM
 ENV MFEM_DIR /opt/mfem
-RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
+RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
+    export CXXFLAGS="$CXXFLAGS -fPIC" && \
     export CFLAGS="$CFLAGS -fPIC" && \
     cd /tmp && \
     git clone https://github.com/mfem/mfem.git && \
@@ -83,4 +88,3 @@ RUN export CXXFLAGS="$CXXFLAGS -fPIC" && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
     rm -rf /tmp/mfem
-
