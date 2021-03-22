@@ -7,27 +7,6 @@ executors:
     working_directory: ~/repo
 
 jobs:
-  circleci:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo/
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image circleci
-          no_output_timeout: 30m
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache
-
   cmake:
     executor: compiler
     steps:
@@ -64,27 +43,6 @@ jobs:
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image dealii
-          no_output_timeout: 30m
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache
-
-  dev_docker:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo/
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image dev_docker
           no_output_timeout: 30m
       - persist_to_workspace:
           root: /root/repo
@@ -175,6 +133,27 @@ jobs:
           paths:
             - branch_cache
 
+  mfem_vdb:
+    executor: compiler
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - run:
+          name: Install bash
+          command: apk add --no-cache bash
+      - attach_workspace:
+          at: /root/repo/
+      - run:
+          name: Build + deploy image
+          command: ./build-and-deploy-image mfem_vdb
+          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: /root/repo
+          paths:
+            - branch_cache
+
   mkl_vtk:
     executor: compiler
     steps:
@@ -253,48 +232,6 @@ jobs:
       - run:
           name: Build + deploy image
           command: ./build-and-deploy-image petsc
-          no_output_timeout: 30m
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache
-
-  python_bionic:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo/
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image python_bionic
-          no_output_timeout: 30m
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache
-
-  ruby_bionic:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo/
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image ruby_bionic
           no_output_timeout: 30m
       - persist_to_workspace:
           root: /root/repo
@@ -410,16 +347,10 @@ workflows:
   version: 2
   build-images:
     jobs:
-      - circleci:
-          requires:
-            - mkl_vtk
       - cmake
       - dealii:
           requires:
             - trilinos
-      - dev_docker:
-          requires:
-            - ruby_bionic
       - intel_mkl:
           requires:
             - cmake
@@ -429,14 +360,11 @@ workflows:
       - mfem:
           requires:
             - petsc
-      - mfem_mkl:
+      - mfem_mkl
+      - mfem_vdb:
           requires:
-            - mfem
-            - intel_mkl
-      - mkl_vtk:
-          requires:
-            - vtk
-            - intel_mkl
+            - mfem_mkl
+      - mkl_vtk
       - open_foam:
           requires:
             - vtk
@@ -446,8 +374,6 @@ workflows:
       - petsc:
           requires:
             - vtk
-      - python_bionic
-      - ruby_bionic
       - slepc:
           requires:
             - petsc

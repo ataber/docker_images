@@ -8,11 +8,13 @@ RUN apt-get update --fix-missing \
     make \
     build-essential \
     libssl-dev \
+    clang-format-10 \
     clang-tidy \
     iwyu \
     cppcheck \
     doxygen \
     graphviz \
+    default-jre \
     libopenmpi-dev \
     openmpi-bin \
     google-perftools \
@@ -21,20 +23,22 @@ RUN apt-get update --fix-missing \
     python3-distutils \
     python3-pip \
     python3-sphinx \
+    python3-venv \
     libgoogle-perftools-dev \
     lldb \
     valgrind \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
+ARG CLANG_VERSION=9
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-9 main" && \
+    apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-$CLANG_VERSION main" && \
     apt-get update --fix-missing && \
-    apt-get install -y clang-9 && \
+    apt-get install -y clang-$CLANG_VERSION && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ARG CMAKE_MAJOR_VERSION=3.16
-ARG CMAKE_MINOR_VERSION=2
+ARG CMAKE_MAJOR_VERSION=3.18
+ARG CMAKE_MINOR_VERSION=1
 ARG CMAKE_VERSION=$CMAKE_MAJOR_VERSION.$CMAKE_MINOR_VERSION
 
 RUN cd /tmp \
@@ -47,8 +51,8 @@ RUN cd /tmp \
     && cd .. \
     && rm -rf cmake*
 
-ENV CC clang-9
-ENV CXX clang++-9
+ENV CC clang-$CLANG_VERSION
+ENV CXX clang++-$CLANG_VERSION
 ENV MPI_C mpicc
 ENV MPI_CXX mpicxx
 

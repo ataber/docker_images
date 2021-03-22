@@ -15,15 +15,14 @@ RUN apt-get update --fix-missing \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-ENV PETSC_VERSION 3.13.1
-# https://askubuntu.com/questions/817255/default-to-python3-for-usr-bin-env-python
-RUN ln -s /usr/bin/python3 /usr/bin/python && \
-    cd /tmp && \
+ENV PETSC_VERSION 3.13.3
+RUN cd /tmp && \
     wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-$PETSC_VERSION.tar.gz && \
     tar xf petsc-lite-$PETSC_VERSION.tar.gz && rm -f petsc-lite-$PETSC_VERSION.tar.gz && \
     cd petsc-$PETSC_VERSION && \
     ./configure \
-    --download-fblaslapack \
+    --with-blas-lib=libblas.a \
+    --with-lapack-lib=liblapack.a \
     --download-hypre  \
     --download-scalapack \
     --download-mumps \
@@ -38,10 +37,10 @@ RUN ln -s /usr/bin/python3 /usr/bin/python && \
     --with-ff=mpif77 \
     --with-clanguage=C++ \
     --with-debugging=1 \
-    --with-shared-libraries=1 \
+    --with-shared-libraries=0 \
     --with-x=0 \
-    COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
-    make PETSC_DIR=`pwd` -j $(cat /proc/cpuinfo | grep processor | wc -l) all && \
+    CFLAGS='-fPIC' CXXFLAGS='-fPIC' FCFLAGS='-fPIC' COPTFLAGS='-O3' FOPTFLAGS='-O3' && \
+    make VERBOSE=1 PETSC_DIR=`pwd` -j $(cat /proc/cpuinfo | grep processor | wc -l) all && \
     make PETSC_DIR=`pwd` install && \
     cd /tmp && rm -rf petsc-$PETSC_VERSION
 

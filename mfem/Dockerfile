@@ -19,9 +19,10 @@ RUN cd /tmp && \
     CXX=mpicxx cmake .. \
         -DCMAKE_INSTALL_PREFIX=$MFEM_DIR \
         -DMFEM_USE_MPI=ON \
+        -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
         -DMFEM_USE_PETSC=OFF \
+        -DBUILD_SHARED_LIBS=OFF \
         -DMFEM_THREAD_SAFE=ON \
-        -DBUILD_SHARED_LIBS=ON \
         -DMFEM_USE_METIS=1 && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
