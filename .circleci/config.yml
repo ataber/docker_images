@@ -361,10 +361,15 @@ workflows:
           requires:
             - petsc
       - mfem_mkl
+          requires:
+            - mfem
+            - intel_mkl
       - mfem_vdb:
           requires:
             - mfem_mkl
       - mkl_vtk
+          requires:
+            - intel_mkl
       - open_foam:
           requires:
             - vtk
