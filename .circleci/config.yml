@@ -112,27 +112,6 @@ jobs:
           paths:
             - branch_cache
 
-  mfem_mkl:
-    executor: compiler
-    steps:
-      - checkout
-      - setup_remote_docker:
-          reusable: true
-          exclusive: true
-      - run:
-          name: Install bash
-          command: apk add --no-cache bash
-      - attach_workspace:
-          at: /root/repo/
-      - run:
-          name: Build + deploy image
-          command: ./build-and-deploy-image mfem_mkl
-          no_output_timeout: 30m
-      - persist_to_workspace:
-          root: /root/repo
-          paths:
-            - branch_cache
-
   mfem_vdb:
     executor: compiler
     steps:
@@ -359,12 +338,14 @@ workflows:
             - slepc
       - mfem:
           requires:
-            - petsc
-      - mfem_mkl
+            - mkl_vtk
       - mfem_vdb:
           requires:
-            - mfem_mkl
-      - mkl_vtk
+            - mfem
+      - mkl_vtk:
+          requires:
+            - intel_mkl
+            - vtk
       - open_foam:
           requires:
             - vtk

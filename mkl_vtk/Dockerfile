@@ -6,7 +6,5 @@ FROM ataber/vtk:${TAG}
 COPY --from=intel /opt/intel /opt/intel
 # Note we need both bashrc and profile. CircleCI runs non-login shell.
 # https://unix.stackexchange.com/questions/29791/bash-profile-not-sourced-when-running-su
-COPY --from=intel /etc/bashrc /etc/bashrc
-COPY --from=intel /etc/profile /etc/profile
-RUN cat /etc/bashrc >> ~/.bashrc
-RUN cat /etc/profile >> ~/.bash_profile
+RUN echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc && \
+    echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bash_profile

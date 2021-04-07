@@ -3,6 +3,8 @@ FROM ubuntu:bionic
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
 &&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    git \
+    less \
     wget \
     software-properties-common \
     make \
@@ -13,7 +15,6 @@ RUN apt-get update --fix-missing \
     iwyu \
     cppcheck \
     doxygen \
-    default-jre \
     graphviz \
     default-jre \
     libopenmpi-dev \
