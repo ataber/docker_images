@@ -1,7 +1,8 @@
 ARG TAG=latest
 FROM ataber/mfem:${TAG}
 
-RUN apt-get update --fix-missing \
+RUN echo "deb http://cz.archive.ubuntu.com/ubuntu eoan main universe" | tee -a  /etc/apt/sources.list
+&& apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
     build-essential \
