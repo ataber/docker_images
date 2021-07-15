@@ -4,8 +4,8 @@ RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
 &&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
     git \
-    less \
     wget \
+    less \
     software-properties-common \
     make \
     build-essential \
