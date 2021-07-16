@@ -1,7 +1,7 @@
 ARG TAG=latest
 FROM ataber/vtk:$TAG
 
-RUN echo "deb http://cz.archive.ubuntu.com/ubuntu eoan main universe" | tee -a  /etc/apt/sources.list
+RUN echo "deb http://cz.archive.ubuntu.com/ubuntu eoan main universe" | tee -a  /etc/apt/sources.list \
 && apt-get update --fix-missing \
 &&  apt-get upgrade -y --force-yes \
 &&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
