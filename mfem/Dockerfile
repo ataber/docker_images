@@ -72,6 +72,7 @@ RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
     export CFLAGS="$CFLAGS -fPIC" && \
     cd /tmp && \
     git clone https://github.com/mfem/mfem.git && \
+    git checkout dc4715e03d177233ea0d891f2875324cadb06dc4 && \
     cd mfem && \
     mkdir build && \
     cd build && \
