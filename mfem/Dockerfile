@@ -58,7 +58,7 @@ RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
     cd /tmp && \
     git clone https://github.com/hypre-space/hypre.git && \
     cd /tmp/hypre && \
-    git checkout v2.20.0
+    git checkout v2.20.0 && \
     cd /tmp/hypre/src/cmbuild && \
     CXX=mpicxx \
     cmake .. && \
