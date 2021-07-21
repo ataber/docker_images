@@ -57,6 +57,8 @@ RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
     export CFLAGS="$CFLAGS -fPIC" && \
     cd /tmp && \
     git clone https://github.com/hypre-space/hypre.git && \
+    cd /tmp/hypre && \
+    git checkout v2.20.0 && \
     cd /tmp/hypre/src/cmbuild && \
     CXX=mpicxx \
     cmake .. && \
@@ -73,6 +75,7 @@ RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
     cd /tmp && \
     git clone https://github.com/mfem/mfem.git && \
     cd mfem && \
+    git checkout dc4715e03d177233ea0d891f2875324cadb06dc4 && \
     mkdir build && \
     cd build && \
     CXX=mpicxx \
