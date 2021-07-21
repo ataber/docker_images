@@ -3,8 +3,8 @@ FROM ubuntu:bionic
 RUN apt-get update --fix-missing \
 &&  apt-get upgrade -y \
 &&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    less \
     git \
+    less \
     wget \
     software-properties-common \
     make \
