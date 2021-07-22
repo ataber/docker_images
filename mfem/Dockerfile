@@ -20,6 +20,7 @@ RUN apt-get update --fix-missing \
     libgmp3-dev \
     libmpfr-dev \
     libblas-dev \
+    liblapack-dev \
 &&  apt-get clean \
 &&  rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
