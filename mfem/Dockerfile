@@ -90,7 +90,7 @@ RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
         -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
         -DMFEM_USE_PETSC=OFF \
         -DBUILD_SHARED_LIBS=ON \
-        -DMFEM_THREAD_SAFE=ON \
+        -DMFEM_THREAD_SAFE=OFF \
         -DMFEM_USE_METIS=1 && \
     make -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make install && \
