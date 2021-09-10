@@ -32,6 +32,7 @@ RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
     cd /tmp && \
     git clone https://github.com/DrTimothyAldenDavis/SuiteSparse && \
     cd SuiteSparse && \
+    git checkout  v5.8.1 && \
     make  library -j $(cat /proc/cpuinfo | grep processor | wc -l) && \
     make INSTALL=$SuiteSparse_DIR install && \
     rm -rf /tmp/SuiteSparse
@@ -44,6 +45,7 @@ RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
     cd /tmp && \
     git clone https://github.com/scivision/METIS.git && \
     cd METIS && \
+    git checkout v5.1.0.1 && \
     mkdir build && \
     cd build && \
     cmake .. \
@@ -77,7 +79,7 @@ RUN . /opt/intel/mkl/bin/mklvars.sh intel64 && \
     cd /tmp && \
     git clone https://github.com/mfem/mfem.git && \
     cd mfem && \
-    git checkout dc4715e03d177233ea0d891f2875324cadb06dc4 && \
+    git checkout v4.3 && \
     mkdir build && \
     cd build && \
     CXX=mpicxx \
